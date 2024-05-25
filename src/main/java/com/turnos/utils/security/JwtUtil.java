@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Component
 public class JwtUtil implements Serializable {

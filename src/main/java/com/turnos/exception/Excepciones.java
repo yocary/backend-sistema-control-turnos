@@ -7,7 +7,7 @@ package com.turnos.exception;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 public class Excepciones extends RuntimeException {
 

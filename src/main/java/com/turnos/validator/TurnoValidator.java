@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Component("TurnoValidator")
 @Scope(BeanDefinition.SCOPE_SINGLETON)

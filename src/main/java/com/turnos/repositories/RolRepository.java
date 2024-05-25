@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Repository
 public interface RolRepository extends CrudRepository<Rol, Long> {

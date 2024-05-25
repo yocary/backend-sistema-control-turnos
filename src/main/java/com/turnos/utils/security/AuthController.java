@@ -19,7 +19,7 @@ import com.turnos.utils.security.AuthResponse;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @RestController
 public class AuthController {

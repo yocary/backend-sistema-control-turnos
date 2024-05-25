@@ -38,13 +38,13 @@ public class CommonController<E, S extends CommonSvc<E>, V extends CommonValidat
     
     @GetMapping
     @ApiOperation(value = "Consulta el listado de objetos de turnos")
-    public ResponseEntity<?> findAll(@RequestHeader(name = "Accept-Languaje", required = false) Locale locale){
+    public ResponseEntity<?> findAll(@RequestHeader(name = "Accept-Languaje", required = false) Locale locale){ //listar todos los datos que tiene la tabla 
         return ResponseEntity.ok().body(service.findAll());
     }
     
     @GetMapping("/{id}")
     @ApiOperation(value = "Consulta un objeto especifico de turnos")
-    public ResponseEntity<?> findById(@PathVariable(required = true) @ApiParam(value = "id") Long id, @RequestHeader(name = "Accept-Languaje", required = false) Locale locale){
+    public ResponseEntity<?> findById(@PathVariable(required = true) @ApiParam(value = "id") Long id, @RequestHeader(name = "Accept-Languaje", required = false) Locale locale){ //listarnos los datos en base al id si es en la tabla empleados ingreso mi dpi traera mis datos 
         Optional<E> o = service.findById(id);
         if(!o.isPresent()){
             return ResponseEntity.notFound().build();
@@ -53,7 +53,7 @@ public class CommonController<E, S extends CommonSvc<E>, V extends CommonValidat
         return ResponseEntity.ok(o.get());
     }
     
-    @PostMapping
+    @PostMapping  //inserta datos en una tabla
     @ApiOperation(value = "Guarda la información de un objeto en turnos")
     public ResponseEntity<?> save(@Valid @RequestBody E entity, BindingResult result, @RequestHeader(name = "Accept-Languaje", required = false) Locale locale){
         if(result.hasErrors()){
@@ -64,7 +64,7 @@ public class CommonController<E, S extends CommonSvc<E>, V extends CommonValidat
         return ResponseEntity.status(HttpStatus.CREATED).body(entityDb);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")  //elimina el registro en base al id
     @ApiOperation(value = "Elimina la infirmación de un objeto en turnos")
     public ResponseEntity<?> eliminar(@PathVariable(required = true) @ApiParam(value = "id") Long id, @RequestHeader(name = "Accept-Languaje", required = false) Locale locale){
         service.deleteById(id);

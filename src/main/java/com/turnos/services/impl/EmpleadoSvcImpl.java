@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Service
 public class EmpleadoSvcImpl extends CommonSvcImpl<Empleado, EmpleadoRepository> implements EmpleadoSvc{

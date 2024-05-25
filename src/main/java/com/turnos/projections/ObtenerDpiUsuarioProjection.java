@@ -7,7 +7,7 @@ package com.turnos.projections;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 public interface ObtenerDpiUsuarioProjection {
     

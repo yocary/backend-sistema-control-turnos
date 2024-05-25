@@ -7,7 +7,7 @@ package com.turnos.controllers;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 import com.turnos.commons.CommonController;
 import com.turnos.dto.EmpleadoDTO;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/empleado")
+@RequestMapping("/empleado")// es como se llamara el controlador para ser utilizado
 @RestController
 public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, EmpleadoValidator>{
 
@@ -33,28 +33,28 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
     private EmpleadoRepository empleadoRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder; //se utiliza para guardar la contraseña encriptada en BD
 
-    @PostMapping("/publico/register")
-    public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
-        if (empleadoRepository.existsById(empleadoDTO.getDpi())) {
+    @PostMapping("/publico/register") //indica que es un metodo post y tambien se forma la ruta de la api  
+    public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {  // 
+        if (empleadoRepository.existsById(empleadoDTO.getDpi())) { //este if valida si existe el dpi ingresado, si ya existe muestra un mensaje de error. 
             // Devuelve un JSON con un mensaje de error
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Collections.singletonMap("error", "Usuario already exists"));
+                    .body(Collections.singletonMap("error", "El Usuario ya existe"));
         }
 
-        Empleado empleado = new Empleado();
+        Empleado empleado = new Empleado(); // se crea un objeto de tipo empleado
         empleado.setDpi(empleadoDTO.getDpi());
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setArea(empleadoDTO.getArea());
         empleado.setEstado(empleadoDTO.getEstado());
         empleado.setUsuario(empleadoDTO.getUsuario());
-        empleado.setTurnoActual(empleadoDTO.getTurno());
-        empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia()));
+        empleado.setTurnoActual(empleadoDTO.getTurno()); // se setean los datos ingreados en el empleadoDTO del requestbody
+        empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia())); // se forma la contraseña encriptada con el passwordEncoder
 
-        empleadoRepository.save(empleado);
+        empleadoRepository.save(empleado);// se utiliza el metodo save para guardae el objeto empleado
 
         // Devuelve un JSON con un mensaje de éxito
-        return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registered successfully"));
+        return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registrado con  éxito"));
     }
 }

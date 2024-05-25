@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Repository
 public interface TurnoRepository extends CrudRepository<Turno, Object> {
 
     @Modifying
-    @Query(value = "INSERT INTO control_turnos.turno "
+    @Query(value = "INSERT INTO control_turnos.turno " //se insertan los campos en la tabla turno
             + "(dpi, fecha_inicio, fecha_fin, hora) "
             + "VALUES (:dpi, :fechaInicio, :fechaFin, :hora)",
             nativeQuery = true)

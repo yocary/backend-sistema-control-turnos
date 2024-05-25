@@ -10,7 +10,7 @@ import com.turnos.models.Empleado;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 public interface EmpleadoSvc extends CommonSvc<Empleado>{
     

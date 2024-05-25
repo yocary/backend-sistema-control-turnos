@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Repository
 public interface EmpleadoRepository extends CrudRepository<Empleado, Object> {
 
-    Empleado findByUsuario(String username);
+    Empleado findByUsuario(String username);  // realiza un select a la tabla de empleado enviando como parametro el usuario
 
     @Modifying
     @Query(value = "UPDATE control_turnos.empleado AS emp\n"
@@ -29,10 +29,10 @@ public interface EmpleadoRepository extends CrudRepository<Empleado, Object> {
             + "WHERE emp.dpi = :dpi",
             nativeQuery = true)
     @Transactional
-    int updateTurnoActual(@Param("dpi") String dpi, @Param("nuevoTurno") String nuevoTurno);
+    int updateTurnoActual(@Param("dpi") String dpi, @Param("nuevoTurno") String nuevoTurno); // esta query se utiliza para actualizar el turno actual enviando como condicion el dpi
 
-    @Query(value = "select e.dpi from control_turnos.empleado e where usuario = :usuario",
+    @Query(value = "select e.dpi from control_turnos.empleado e where usuario = :usuario", // esto se consume en turnosvcimpl
             nativeQuery = true)
     @Transactional
-    ObtenerDpiUsuarioProjection obtenerDpiUsuario(@Param("usuario") String usuario);
+    ObtenerDpiUsuarioProjection obtenerDpiUsuario(@Param("usuario") String usuario); //hace un select a la tabla empleado, enviando como parametro el usuario y obteniendo de la consulta solo el dpi
 }

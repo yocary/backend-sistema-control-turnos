@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Component("EmpleadoValidator")
 @Scope(BeanDefinition.SCOPE_SINGLETON)
-public class EmpleadoValidator implements CommonValidatorSvc<Empleado>{
+public class EmpleadoValidator implements CommonValidatorSvc<Empleado>{  //el emplado es el modelo
     
     
     @Override
-    public Empleado validate(Empleado e){
+    public Empleado validate(Empleado e){ //devolver una esepcion al validador
         return e;
     }
     

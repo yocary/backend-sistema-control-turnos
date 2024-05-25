@@ -17,15 +17,18 @@ import javax.persistence.FetchType;
 
 import java.util.Set;
 import java.util.HashSet;
+import javax.persistence.Table;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @Entity
+@Table(name = "empleado", schema = "control_turnos")
+//mapeo de cada campo que esta en la tabla, el tipo de campo que esta en la tabla y se agregan los metodos getter y setter
 public class Empleado {
 
-    @Id
+    @Id    //es una anotacion
     @Column(name = "dpi", unique = true, nullable = false)
     private String dpi;
 
@@ -47,7 +50,7 @@ public class Empleado {
     @Column(name = "turno_actual", nullable = false)
     private String turnoActual;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER) // tiene relacion 
     @JoinTable(
             name = "empleado_rol",
             joinColumns = @JoinColumn(name = "empleado_dpi"),
