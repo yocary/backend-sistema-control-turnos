@@ -41,9 +41,6 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
     @Autowired
     private PasswordEncoder passwordEncoder; //se utiliza para guardar la contraseña encriptada en BD
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
     @PostMapping("/publico/register") //indica que es un metodo post y tambien se forma la ruta de la api  
     public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {  // 
         if (empleadoRepository.existsById(empleadoDTO.getDpi())) { //este if valida si existe el dpi ingresado, si ya existe muestra un mensaje de error. 
@@ -65,15 +62,5 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
 
         // Devuelve un JSON con un mensaje de éxito
         return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registrado con  éxito"));
-    }
-
-    @GetMapping("/publico/roles/{dpi}")
-    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
-        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
-        if (empleado == null) {
-            return ResponseEntity.notFound().build();
-        }
-        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
-        return ResponseEntity.ok(roles);
     }
 }

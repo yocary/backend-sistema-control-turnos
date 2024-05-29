@@ -1,6 +1,11 @@
 package com.turnos.utils.security;
 
-import java.util.Set;
+/**
+ *
+ * @author yocary
+ */
+public class AuthResponse {
+    private final String jwt;
 
 public class AuthResponse {
     private String jwt;

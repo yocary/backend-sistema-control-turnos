@@ -14,6 +14,11 @@ import com.turnos.models.Rol;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+/**
+ *
+ * @author yocary
+ */
 @RestController
 public class AuthController {
 
