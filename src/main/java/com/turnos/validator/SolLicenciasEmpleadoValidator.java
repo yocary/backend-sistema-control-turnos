@@ -6,7 +6,7 @@
 package com.turnos.validator;
 
 import com.turnos.commons.CommonValidatorSvc;
-import com.turnos.models.Empleado;
+import com.turnos.models.SolLicenciasEmpleado;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,14 +15,12 @@ import org.springframework.stereotype.Component;
  *
  * @author yocary
  */
-@Component("EmpleadoValidator")
+@Component("SolLicenciasEmpleadoValidator")
 @Scope(BeanDefinition.SCOPE_SINGLETON)
-public class EmpleadoValidator implements CommonValidatorSvc<Empleado>{  //el emplado es el modelo
-    
-    
+public class SolLicenciasEmpleadoValidator implements CommonValidatorSvc<SolLicenciasEmpleado> {
+
     @Override
-    public Empleado validate(Empleado e){ //devolver una esepcion al validador
+    public SolLicenciasEmpleado validate(SolLicenciasEmpleado e) {
         return e;
     }
-    
 }

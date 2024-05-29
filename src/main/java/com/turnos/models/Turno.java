@@ -7,7 +7,7 @@ package com.turnos.models;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 import javax.persistence.*;
 import java.util.Date;

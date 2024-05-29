@@ -7,54 +7,73 @@ package com.turnos.controllers;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 import com.turnos.commons.CommonController;
 import com.turnos.dto.EmpleadoDTO;
 import com.turnos.models.Empleado;
+import com.turnos.models.Rol;
 import com.turnos.repositories.EmpleadoRepository;
 import com.turnos.services.EmpleadoSvc;
+import com.turnos.utils.security.UserDetailsServiceImpl;
 import com.turnos.validator.EmpleadoValidator;
 import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/empleado")
+@RequestMapping("/empleado")// es como se llamara el controlador para ser utilizado
 @RestController
-public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, EmpleadoValidator>{
+public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, EmpleadoValidator> {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder; //se utiliza para guardar la contraseña encriptada en BD
 
-    @PostMapping("/publico/register")
-    public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
-        if (empleadoRepository.existsById(empleadoDTO.getDpi())) {
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
+    @PostMapping("/publico/register") //indica que es un metodo post y tambien se forma la ruta de la api  
+    public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {  // 
+        if (empleadoRepository.existsById(empleadoDTO.getDpi())) { //este if valida si existe el dpi ingresado, si ya existe muestra un mensaje de error. 
             // Devuelve un JSON con un mensaje de error
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Collections.singletonMap("error", "Usuario already exists"));
+                    .body(Collections.singletonMap("error", "El Usuario ya existe"));
         }
 
-        Empleado empleado = new Empleado();
+        Empleado empleado = new Empleado(); // se crea un objeto de tipo empleado
         empleado.setDpi(empleadoDTO.getDpi());
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setArea(empleadoDTO.getArea());
         empleado.setEstado(empleadoDTO.getEstado());
         empleado.setUsuario(empleadoDTO.getUsuario());
-        empleado.setTurnoActual(empleadoDTO.getTurno());
-        empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia()));
+        empleado.setTurnoActual(empleadoDTO.getTurno()); // se setean los datos ingreados en el empleadoDTO del requestbody
+        empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia())); // se forma la contraseña encriptada con el passwordEncoder
 
-        empleadoRepository.save(empleado);
+        empleadoRepository.save(empleado);// se utiliza el metodo save para guardae el objeto empleado
 
         // Devuelve un JSON con un mensaje de éxito
-        return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registered successfully"));
+        return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registrado con  éxito"));
+    }
+
+    @GetMapping("/publico/roles/{dpi}")
+    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
+        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
+        if (empleado == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
+        return ResponseEntity.ok(roles);
     }
 }

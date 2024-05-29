@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 @RestController
 @RequestMapping("/roles")
@@ -30,9 +30,9 @@ public class RolController {
     public ResponseEntity<?> addRole(@RequestBody Rol rol) {
         Rol existingRole = rolRepository.findByNombre(rol.getNombre());
         if (existingRole != null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Rol already exists");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Rol ya existe");
         }
         rolRepository.save(rol);
-        return ResponseEntity.ok("Rol added successfully");
+        return ResponseEntity.ok("Rol agregado con éxito");
     }
 }

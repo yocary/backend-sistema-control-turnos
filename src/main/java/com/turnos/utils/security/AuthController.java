@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.turnos.utils.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.turnos.utils.security.AuthResponse;
+import com.turnos.models.Empleado;
+import com.turnos.models.Rol;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-
-/**
- *
- * @author pdmelend
- */
 @RestController
 public class AuthController {
 
@@ -37,17 +30,26 @@ public class AuthController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest) throws Exception {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
+            throw new Exception("Usuario o contraseña incorrecta", e);
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        Empleado empleado = userDetailsService.getEmpleadoByUsername(authenticationRequest.getUsername());
 
-        final String jwt = jwtUtil.generateToken(userDetails);
+        System.out.println("DPI del empleado: " + empleado.getDpi());
 
-        return ResponseEntity.ok(new AuthResponse(jwt));
+        final String jwt = jwtUtil.generateTokenWithUserDetails(userDetails, empleado.getDpi(), obtenerRoles(empleado), empleado.getCorreo());
+
+        // Incluye el DPI y los roles en la respuesta
+        AuthResponse authResponse = new AuthResponse(jwt, empleado.getDpi(), obtenerRoles(empleado));
+
+        return ResponseEntity.ok(authResponse);
+    }
+
+    private Set<String> obtenerRoles(Empleado empleado) {
+        return empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
     }
 }
-

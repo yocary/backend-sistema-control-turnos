@@ -7,7 +7,7 @@ package com.turnos.utils.security;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 public class AuthRequest {
     private String username;

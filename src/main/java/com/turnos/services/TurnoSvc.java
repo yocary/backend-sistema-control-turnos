@@ -10,7 +10,7 @@ import com.turnos.models.Turno;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
 public interface TurnoSvc extends CommonSvc<Turno>{
     

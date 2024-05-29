@@ -7,9 +7,9 @@ package com.turnos.dto;
 
 /**
  *
- * @author pdmelend
+ * @author yocary
  */
-public class EmpleadoDTO {
+public class EmpleadoDTO { // este es una modelo que se acopla a nuestra necesidad que es consumida por el empleadocontroller.java
 
     private String dpi;
     private String nombre;

@@ -9,7 +9,12 @@ package com.turnos.projections;
  *
  * @author yocary
  */
-public interface ObtenerDpiUsuarioProjection {
-
-    String getDpi();
+public interface obtenerSolCambioTurnoProjection {
+    
+    String getIdSolicitud();
+    String getTurnoActual();
+    String getTurnoNuevo();
+    String getUsuario();
+    String getFecha();
+    String getJustificacion();
 }
