@@ -18,12 +18,6 @@ public class EmailController {
     @Autowired
     private EmailServiceImpl emailService;
 
-    @GetMapping("/sendEmail")
-    public String sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String text) {
-        emailService.sendSimpleEmail(to, subject, text);
-        return "Correo enviado con éxito";
-    }
-
     @GetMapping("/sendHtmlEmail")
     public String sendHtmlEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String htmlContent) {
         try {

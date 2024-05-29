@@ -23,6 +23,8 @@ public interface EmpleadoRepository extends CrudRepository<Empleado, Object> {
 
     Empleado findByUsuario(String username);  // realiza un select a la tabla de empleado enviando como parametro el usuario
 
+    Empleado findByDpi(String dpi);
+
     @Modifying
     @Query(value = "UPDATE control_turnos.empleado AS emp\n"
             + "SET turno_actual = :nuevoTurno\n"
