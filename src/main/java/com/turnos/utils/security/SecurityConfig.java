@@ -40,10 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/solCambioTurno/**").permitAll()
+                .antMatchers("/empleadoRol/**").permitAll()
                 .antMatchers("/solLicenciasEmpleado/**").hasAuthority("RolAdminRRHH")
                 .antMatchers("/solLicenciasEmpleado").hasAuthority("RolAdminRRHH")
                 .antMatchers("/empleado/**").hasAuthority("RolAdminRRHH")
-//                .antMatchers("/solCambioTurno/**").hasAuthority("rolPrueba")
+                //                .antMatchers("/solCambioTurno/**").hasAuthority("rolPrueba")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
