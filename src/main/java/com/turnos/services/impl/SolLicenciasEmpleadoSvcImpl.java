@@ -12,7 +12,6 @@ import com.turnos.projections.obtenerLicenciaProjection;
 import com.turnos.projections.obtenerSolLicenciasProjection;
 import com.turnos.repositories.SolLicenciasEmpleadoRepository;
 import com.turnos.services.SolLicenciasEmpleadoSvc;
-
 import com.turnos.utils.security.AuthController;
 import com.turnos.utils.security.AuthUtil;
 import com.turnos.utils.security.UserDetailsServiceImpl;
@@ -36,8 +35,8 @@ public class SolLicenciasEmpleadoSvcImpl extends CommonSvcImpl<SolLicenciasEmple
     private AuthUtil authUtil;
 
     @Override
-    public List<obtenerSolLicenciasProjection> obtenerSolLicenciasPA(String estado) {
-        return repository.obtenerSolLicenciasPA(estado);
+    public List<obtenerSolLicenciasProjection> obtenerSolLicencias(String estado) {
+        return repository.obtenerSolLicencias(estado);
     }
 
     @Override
@@ -45,6 +44,8 @@ public class SolLicenciasEmpleadoSvcImpl extends CommonSvcImpl<SolLicenciasEmple
     public void actualizarEstadoLicencia(String estadoSol, Long idLicencia) {
 
         obtenerLicenciaProjection licencia = repository.obtenerLicencia(idLicencia);
+
+        String usuarioAprobo = authUtil.getCurrentUsername();
 
         System.out.println("CORREO::: " + licencia.getCorreo());
         System.out.println("NOMBRE::: " + licencia.getNombre());
@@ -91,7 +92,7 @@ public class SolLicenciasEmpleadoSvcImpl extends CommonSvcImpl<SolLicenciasEmple
                 repository.actualizarEstadoUsuario("Inactivo", licencia.getUsuario());
             }
 
-            repository.actualizarEstadoLicencia(estadoSol, idLicencia);
+            repository.actualizarEstadoLicencia(estadoSol, usuarioAprobo, idLicencia);
         } catch (Exception e) {
             throw new UnsupportedOperationException(e);
         }

@@ -47,7 +47,9 @@ public class SolLicenciasEmpleado {
     @Column(name = "motivo_solicitud", length = 100)
     private String motivoSolicitud;
 
-    // Getters and Setters
+    @Column(name = "admin_aprobo", length = 50)
+    private String adminAprobo;
+
     public Long getIdLicencia() {
         return idLicencia;
     }
@@ -110,6 +112,14 @@ public class SolLicenciasEmpleado {
 
     public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getAdminAprobo() {
+        return adminAprobo;
+    }
+
+    public void setAdminAprobo(String adminAprobo) {
+        this.adminAprobo = adminAprobo;
     }
 
 }

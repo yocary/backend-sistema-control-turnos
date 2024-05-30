@@ -28,6 +28,7 @@ public interface SolLicenciasEmpleadoRepository extends CrudRepository<SolLicenc
             + "  cl.nombre_estado AS tiposol,\n"
             + "  sle.usuario AS usuario,\n"
             + "  sle.motivo_solicitud AS justificacion,\n"
+            + " COALESCE(NULLIF(sle.admin_aprobo, ''), '-') as adminAprobo,\n"
             + "  TO_CHAR(sle.fecha_creacion, 'DD/MM/YYYY') AS fechaCreacion\n"
             + "FROM \n"
             + "  sol_licencias_empleado sle\n"
@@ -40,14 +41,16 @@ public interface SolLicenciasEmpleadoRepository extends CrudRepository<SolLicenc
             + "  estado_solicitud = :estado",
             nativeQuery = true)
     @Transactional
-    public List<obtenerSolLicenciasProjection> obtenerSolLicenciasPA(@Param("estado") String estado);
+    public List<obtenerSolLicenciasProjection> obtenerSolLicencias(@Param("estado") String estado);
 
     @Modifying
+    @Transactional
     @Query(value = "UPDATE sol_licencias_empleado\n"
-            + "SET estado_solicitud = :estadoSol\n"
+            + "SET estado_solicitud = :estadoSol, admin_aprobo = :adminAprobo\n"
             + "WHERE id_licencia = :idLicencia",
             nativeQuery = true)
-    public void actualizarEstadoLicencia(@Param("estadoSol") String estadoSol, @Param("idLicencia") Long idLicencia);
+    void actualizarEstadoLicencia(@Param("estadoSol") String estadoSol, @Param("adminAprobo") String adminAprobo,
+            @Param("idLicencia") Long idLicencia);
 
     @Modifying
     @Query(value = "UPDATE control_turnos.empleado \n"

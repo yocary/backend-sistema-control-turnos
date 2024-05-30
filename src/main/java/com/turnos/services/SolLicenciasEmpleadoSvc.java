@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface SolLicenciasEmpleadoSvc extends CommonSvc<SolLicenciasEmpleado> {
 
-    public List<obtenerSolLicenciasProjection> obtenerSolLicenciasPA(String estado);
+    public List<obtenerSolLicenciasProjection> obtenerSolLicencias(String estado);
 
     public void actualizarEstadoLicencia(String estadoSol, Long idLicencia);
 }

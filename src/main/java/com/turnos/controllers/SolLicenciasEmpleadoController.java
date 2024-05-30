@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SolLicenciasEmpleadoController extends CommonController<SolLicenciasEmpleado, SolLicenciasEmpleadoSvc, SolLicenciasEmpleadoValidator> {
 
-    @GetMapping("/obtenerSolLicenciasPA/{estado}")
+    @GetMapping("/obtenerSolLicencias/{estado}")
     public List<obtenerSolLicenciasProjection> obtenerSolLicenciasPA(@PathVariable String estado) {
-        return service.obtenerSolLicenciasPA(estado);
+        return service.obtenerSolLicencias(estado);
     }
 
     @PostMapping("/actualizarEstadoLicencia/{estadoSol}/{idLicencia}")

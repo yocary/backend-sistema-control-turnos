@@ -16,5 +16,6 @@ public interface obtenerSolLicenciasProjection {
     String getUsuario();
     String getJustificacion();
     String getFechaCreacion();
+    String getAdminAprobo();
     
 }
