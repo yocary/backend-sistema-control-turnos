@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/solCambioTurno/**").permitAll()
                 .antMatchers("/solLicenciasEmpleado/**").hasAuthority("RolAdminRRHH")
+                .antMatchers("/solLicenciasEmpleado").hasAuthority("RolAdminRRHH")
                 .antMatchers("/empleado/**").hasAuthority("RolAdminRRHH")
 //                .antMatchers("/solCambioTurno/**").hasAuthority("rolPrueba")
                 .anyRequest().authenticated()
