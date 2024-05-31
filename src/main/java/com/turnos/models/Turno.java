@@ -9,6 +9,7 @@ package com.turnos.models;
  *
  * @author yocary
  */
+import java.time.LocalDate;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -25,10 +26,10 @@ public class Turno {
     private String dpi;
 
     @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fecha_fin")
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "hora")
     private String hora;
@@ -51,19 +52,19 @@ public class Turno {
         this.dpi = dpi;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 

@@ -7,6 +7,7 @@ package com.turnos.services;
 
 import com.turnos.commons.CommonSvc;
 import com.turnos.models.Turno;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,5 +15,5 @@ import com.turnos.models.Turno;
  */
 public interface TurnoSvc extends CommonSvc<Turno>{
     
-   public void guardarCambioTurno(String usuario, String fechaInicio, String fechaFin, String turno);
+   public void guardarCambioTurno(String usuario, LocalDate fechaInicio, LocalDate fechaFin, String turno);
 }

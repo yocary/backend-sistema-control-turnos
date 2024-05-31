@@ -7,7 +7,7 @@ package com.turnos.repositories;
 
 import com.turnos.models.Turno;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -28,7 +28,7 @@ public interface TurnoRepository extends CrudRepository<Turno, Object> {
             nativeQuery = true)
     void insertTurno(
             @Param("dpi") String dpi,
-            @Param("fechaInicio") Date fechaInicio,
-            @Param("fechaFin") Date fechaFin,
+            @Param("fechaInicio") LocalDate fechaInicio,
+            @Param("fechaFin") LocalDate fechaFin,
             @Param("hora") Timestamp hora);
 }

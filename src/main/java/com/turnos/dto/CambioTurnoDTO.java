@@ -5,6 +5,7 @@
  */
 package com.turnos.dto;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,8 @@ import lombok.NoArgsConstructor;
 public class CambioTurnoDTO {
 
     private String usuario;
-    private String fechaInicio;
-    private String fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private String turno;
 
 }
