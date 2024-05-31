@@ -28,7 +28,7 @@ public interface SolCambioTurnoRepository extends CrudRepository<SolCambioTurno,
             + "	turno_inicial as turnoActual,\n"
             + "	turno_nuevo as turnoNuevo,\n"
             + "	usuario as usuario,\n"
-            + "	fecha_solicitud fecha,\n"
+            + "	TO_CHAR(fecha_solicitud, 'DD/MM/YYYY') fecha,\n"
             + "	justificacion as justificacion\n"
             + "from\n"
             + "	sol_cambio_turno sct\n"

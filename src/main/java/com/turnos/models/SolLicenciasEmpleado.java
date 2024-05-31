@@ -9,7 +9,9 @@ package com.turnos.models;
  *
  * @author yocary
  */
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,13 +38,13 @@ public class SolLicenciasEmpleado {
     private String estadoSolicitud;
 
     @Column(name = "fecha_inicio", nullable = false)
-    private LocalDateTime fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fecha_fin", nullable = false)
-    private LocalDateTime fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "fecha_creacion", nullable = false)
-    private LocalDateTime fechaCreacion;
+    private Date fechaCreacion;
 
     @Column(name = "motivo_solicitud", length = 100)
     private String motivoSolicitud;
@@ -82,19 +84,19 @@ public class SolLicenciasEmpleado {
         this.estadoSolicitud = estadoSolicitud;
     }
 
-    public LocalDateTime getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDateTime fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDateTime getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(LocalDateTime fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -106,11 +108,11 @@ public class SolLicenciasEmpleado {
         this.motivoSolicitud = motivoSolicitud;
     }
 
-    public LocalDateTime getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 

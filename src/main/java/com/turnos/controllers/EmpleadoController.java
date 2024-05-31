@@ -44,7 +44,7 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     
-    @PostMapping("/publico/register") //indica que es un metodo post y tambien se forma la ruta de la api  
+    @PostMapping("/registrar") //indica que es un metodo post y tambien se forma la ruta de la api  
     public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {  // 
         if (empleadoRepository.existsById(empleadoDTO.getDpi())) { //este if valida si existe el dpi ingresado, si ya existe muestra un mensaje de error. 
             // Devuelve un JSON con un mensaje de error
