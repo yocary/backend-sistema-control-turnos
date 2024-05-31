@@ -18,6 +18,7 @@ public class EmpleadoDTO { // este es una modelo que se acopla a nuestra necesid
     private String usuario;
     private String contrasenia;
     private String turno;
+    private String correo;
 
     public String getDpi() {
         return dpi;
@@ -73,6 +74,14 @@ public class EmpleadoDTO { // este es una modelo que se acopla a nuestra necesid
 
     public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
 }

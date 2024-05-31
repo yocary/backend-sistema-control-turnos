@@ -34,16 +34,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/empleado")// es como se llamara el controlador para ser utilizado
 @RestController
 public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, EmpleadoValidator> {
-
+    
     @Autowired
     private EmpleadoRepository empleadoRepository;
-
+    
     @Autowired
     private PasswordEncoder passwordEncoder; //se utiliza para guardar la contraseña encriptada en BD
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-
+    
     @PostMapping("/publico/register") //indica que es un metodo post y tambien se forma la ruta de la api  
     public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {  // 
         if (empleadoRepository.existsById(empleadoDTO.getDpi())) { //este if valida si existe el dpi ingresado, si ya existe muestra un mensaje de error. 
@@ -51,13 +51,14 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Collections.singletonMap("error", "El Usuario ya existe"));
         }
-
+        
         Empleado empleado = new Empleado(); // se crea un objeto de tipo empleado
         empleado.setDpi(empleadoDTO.getDpi());
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setArea(empleadoDTO.getArea());
         empleado.setEstado(empleadoDTO.getEstado());
         empleado.setUsuario(empleadoDTO.getUsuario());
+        empleado.setCorreo(empleadoDTO.getCorreo());
         empleado.setTurnoActual(empleadoDTO.getTurno()); // se setean los datos ingreados en el empleadoDTO del requestbody
         empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia())); // se forma la contraseña encriptada con el passwordEncoder
 
@@ -66,7 +67,7 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
         // Devuelve un JSON con un mensaje de éxito
         return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registrado con  éxito"));
     }
-
+    
     @GetMapping("/publico/roles/{dpi}")
     public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
         Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
