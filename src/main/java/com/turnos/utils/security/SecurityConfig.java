@@ -25,13 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // Agrega esta línea para imprimir la configuración de seguridad aplicada
+
         System.out.println("Configuración de seguridad aplicada: " + http);
 
         http.csrf().disable()
@@ -41,19 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/solCambioTurno").hasAuthority("RolEmpleado")
                 .antMatchers("/solLicenciasEmpleado/guardar").hasAuthority("RolEmpleado")
-                .antMatchers("/solLicenciasEmpleado/**").hasAuthority("RolAdminArea")
-                .antMatchers("/solLicenciasEmpleado").hasAuthority("RolAdminArea")
-                .antMatchers("/empleado").hasAuthority("RolAdminArea")
-                .antMatchers("/empleado/**").hasAuthority("RolAdminRRHH")
-                .antMatchers("/empleado").hasAuthority("RolAdminRRHH")
-                .antMatchers("/solLicenciasEmpleado/**").hasAuthority("RolAdminRRHH")
-                .antMatchers("/solLicenciasEmpleado").hasAuthority("RolAdminRRHH")
+                .antMatchers("/solLicenciasEmpleado/**").hasAnyAuthority("RolAdminRRHH", "RolAdminArea")
                 .antMatchers("/empleadoRol/**").hasAuthority("RolAdminRRHH")
+                .antMatchers("/empleado/**").hasAnyAuthority("RolAdminRRHH", "RolAdminArea")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // Verifica si el objeto devuelto por getSharedObject es null antes de acceder a sus métodos
         FilterSecurityInterceptor filterSecurityInterceptor = http.getSharedObject(FilterSecurityInterceptor.class);
         if (filterSecurityInterceptor != null) {
             System.out.println("Configuración de autorización aplicada: " + filterSecurityInterceptor.getSecurityMetadataSource());
