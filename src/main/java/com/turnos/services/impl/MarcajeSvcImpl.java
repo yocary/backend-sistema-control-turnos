@@ -12,6 +12,7 @@ import com.turnos.services.MarcajeSvc;
 import com.turnos.utils.security.AuthUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,9 @@ public class MarcajeSvcImpl extends CommonSvcImpl<Marcaje, MarcajeRepository> im
 
         String usuario = authUtil.getCurrentUsername();
 
-        LocalDate fechaActual = LocalDate.now();
+        ZoneId zonaHorariaCliente = ZoneId.systemDefault();
+
+        LocalDate fechaActual = LocalDate.now(zonaHorariaCliente);
 
         Marcaje marcajeExistente = repository.findByUsuarioAndFecha(usuario, fechaActual);
 
@@ -98,7 +101,9 @@ public class MarcajeSvcImpl extends CommonSvcImpl<Marcaje, MarcajeRepository> im
 
         String usuario = authUtil.getCurrentUsername();
 
-        LocalDate fechaActual = LocalDate.now();
+        ZoneId zonaHorariaCliente = ZoneId.systemDefault();
+
+        LocalDate fechaActual = LocalDate.now(zonaHorariaCliente);
 
         return repository.findByUsuarioAndFecha(usuario, fechaActual);
     }
