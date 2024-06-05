@@ -40,17 +40,17 @@ public interface SolCambioTurnoRepository extends CrudRepository<SolCambioTurno,
 
     @Modifying
     @Query(value = "UPDATE sol_cambio_turno \n"
-            + "SET estado = :estadoSol\n"
+            + "SET estado = :estadoSol, usuario_adiciono = :usuarioAdiciono \n"
             + "WHERE id_solicitud = :idSolicitud",
             nativeQuery = true)
-    public void actualizarEstadoTurno(@Param("estadoSol") String estadoSol, @Param("idSolicitud") Long idSolicitud);
+    public void actualizarEstadoTurno(@Param("estadoSol") String estadoSol, @Param("idSolicitud") Long idSolicitud, @Param("usuarioAdiciono") String usuarioAdiciono);
 
     @Modifying
     @Query(value = "UPDATE empleado \n"
-            + "SET turno_actual = :turno\n"
+            + "SET turno_actual = :turno, usuario_adiciono = :usuarioAdiciono \n"
             + "WHERE usuario = :usuario",
             nativeQuery = true)
-    public void actualizarTurnoEmpleado(@Param("turno") String turno, @Param("usuario") String usuario);
+    public void actualizarTurnoEmpleado(@Param("turno") String turno, @Param("usuario") String usuario, @Param("usuarioAdiciono") String usuarioAdiciono);
 
     @Query(value = "select\n"
             + "	id_solicitud as idSolicitud,\n"

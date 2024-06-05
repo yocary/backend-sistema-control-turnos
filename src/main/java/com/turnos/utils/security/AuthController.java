@@ -39,12 +39,12 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         Empleado empleado = userDetailsService.getEmpleadoByUsername(authenticationRequest.getUsername());
 
-        System.out.println("DPI del empleado: " + empleado.getDpi());
+        System.out.println("usurio del empleado: " + empleado.getUsuario());
 
-        final String jwt = jwtUtil.generateTokenWithUserDetails(userDetails, empleado.getDpi(), obtenerRoles(empleado), empleado.getCorreo());
+        final String jwt = jwtUtil.generateTokenWithUserDetails(userDetails, empleado.getUsuario(), obtenerRoles(empleado), empleado.getCorreo());
 
         // Incluye el DPI y los roles en la respuesta
-        AuthResponse authResponse = new AuthResponse(jwt, empleado.getDpi(), obtenerRoles(empleado));
+        AuthResponse authResponse = new AuthResponse(jwt, empleado.getUsuario(), obtenerRoles(empleado));
 
         return ResponseEntity.ok(authResponse);
     }

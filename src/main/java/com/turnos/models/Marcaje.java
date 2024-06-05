@@ -39,4 +39,5 @@ public class Marcaje {
     private LocalTime horaDescanso1;
     private LocalTime horaDescanso2;
     private LocalTime horaSalida;
+    private String usuarioAdiciono;
 }

@@ -28,10 +28,10 @@ public interface EmpleadoRepository extends CrudRepository<Empleado, Object> {
     @Modifying
     @Query(value = "UPDATE control_turnos.empleado AS emp\n"
             + "SET turno_actual = :nuevoTurno\n"
-            + "WHERE emp.dpi = :dpi",
+            + "WHERE emp.usuario = :usuario",
             nativeQuery = true)
     @Transactional
-    int updateTurnoActual(@Param("dpi") String dpi, @Param("nuevoTurno") String nuevoTurno); // esta query se utiliza para actualizar el turno actual enviando como condicion el dpi
+    int updateTurnoActual(@Param("usuario") String dpi, @Param("nuevoTurno") String nuevoTurno); // esta query se utiliza para actualizar el turno actual enviando como condicion el dpi
 
     @Query(value = "select e.dpi from control_turnos.empleado e where usuario = :usuario", // esto se consume en turnosvcimpl
             nativeQuery = true)

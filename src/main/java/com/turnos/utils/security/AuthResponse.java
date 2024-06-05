@@ -4,12 +4,12 @@ import java.util.Set;
 
 public class AuthResponse {
     private String jwt;
-    private String dpi;
+    private String usuario;
     private Set<String> roles;
 
-    public AuthResponse(String jwt, String dpi, Set<String> roles) {
+    public AuthResponse(String jwt, String usuario, Set<String> roles) {
         this.jwt = jwt;
-        this.dpi = dpi;
+        this.usuario = usuario;
         this.roles = roles;
     }
 
@@ -23,12 +23,12 @@ public class AuthResponse {
         this.jwt = jwt;
     }
 
-    public String getDpi() {
-        return dpi;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setDpi(String dpi) {
-        this.dpi = dpi;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public Set<String> getRoles() {

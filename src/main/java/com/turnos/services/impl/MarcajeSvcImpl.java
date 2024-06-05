@@ -78,15 +78,19 @@ public class MarcajeSvcImpl extends CommonSvcImpl<Marcaje, MarcajeRepository> im
         switch (tipoAccion) {
             case "entrada":
                 marcajeExistente.setHoraEntrada(LocalTime.now());
+                marcajeExistente.setUsuarioAdiciono(authUtil.getCurrentUsername());
                 break;
             case "descanso1":
                 marcajeExistente.setHoraDescanso1(LocalTime.now());
+                marcajeExistente.setUsuarioAdiciono(authUtil.getCurrentUsername());
                 break;
             case "descanso2":
                 marcajeExistente.setHoraDescanso2(LocalTime.now());
+                marcajeExistente.setUsuarioAdiciono(authUtil.getCurrentUsername());
                 break;
             case "salida":
                 marcajeExistente.setHoraSalida(LocalTime.now());
+                marcajeExistente.setUsuarioAdiciono(authUtil.getCurrentUsername());
                 break;
             default:
 

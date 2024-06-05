@@ -52,6 +52,9 @@ public class SolLicenciasEmpleado {
     @Column(name = "admin_aprobo", length = 50)
     private String adminAprobo;
 
+    @Column(name = "usuario_adiciono", length = 50)
+    private String usuarioAdiciono;
+
     public Long getIdLicencia() {
         return idLicencia;
     }
@@ -122,6 +125,14 @@ public class SolLicenciasEmpleado {
 
     public void setAdminAprobo(String adminAprobo) {
         this.adminAprobo = adminAprobo;
+    }
+
+    public String getUsuarioAdiciono() {
+        return usuarioAdiciono;
+    }
+
+    public void setUsuarioAdiciono(String usuarioAdiciono) {
+        this.usuarioAdiciono = usuarioAdiciono;
     }
 
 }

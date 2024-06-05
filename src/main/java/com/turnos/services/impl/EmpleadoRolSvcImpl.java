@@ -11,6 +11,7 @@ import com.turnos.projections.ObtenerDpiUsuarioProjection;
 import com.turnos.repositories.EmpleadoRepository;
 import com.turnos.repositories.EmpleadoRolRepository;
 import com.turnos.services.EmpleadoRolSvc;
+import com.turnos.utils.security.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,16 @@ public class EmpleadoRolSvcImpl extends CommonSvcImpl<EmpleadoRol, EmpleadoRolRe
     @Autowired
     EmpleadoRepository empleadoRepository;
 
+    @Autowired
+    private AuthUtil authUtil;
+
     public EmpleadoRol saveEmpleadoRol(String usuario, int rolId) {
 
+        String usuarioAdicino = authUtil.getCurrentUsername();
         ObtenerDpiUsuarioProjection dpi = empleadoRepository.obtenerDpiUsuario(usuario);
         EmpleadoRol empleadoRol = new EmpleadoRol();
         empleadoRol.setId(new EmpleadoRol.EmpleadoRolId(dpi.getDpi(), rolId));
+        empleadoRol.setUsuarioAdiciono(usuarioAdicino);
         return repository.save(empleadoRol);
     }
 

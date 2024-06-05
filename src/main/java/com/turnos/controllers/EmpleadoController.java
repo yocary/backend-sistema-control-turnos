@@ -16,6 +16,7 @@ import com.turnos.models.Rol;
 import com.turnos.repositories.EmpleadoRepository;
 import com.turnos.services.EmpleadoSvc;
 import com.turnos.services.impl.EmailServiceImpl;
+import com.turnos.utils.security.AuthUtil;
 import com.turnos.utils.security.UserDetailsServiceImpl;
 import com.turnos.validator.EmpleadoValidator;
 import java.util.Collections;
@@ -49,8 +50,14 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
     @Autowired
     private EmailServiceImpl emailService;
 
+    @Autowired
+    private AuthUtil authUtil;
+
     @PostMapping("/registrar") //indica que es un metodo post y tambien se forma la ruta de la api  
     public ResponseEntity<Object> registerEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {  // 
+
+        String usuarioAdicino = authUtil.getCurrentUsername();
+        
         if (empleadoRepository.existsById(empleadoDTO.getDpi())) { //este if valida si existe el dpi ingresado, si ya existe muestra un mensaje de error. 
             // Devuelve un JSON con un mensaje de error
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -64,7 +71,8 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
         empleado.setEstado(empleadoDTO.getEstado());
         empleado.setUsuario(empleadoDTO.getUsuario());
         empleado.setCorreo(empleadoDTO.getCorreo());
-        empleado.setTurnoActual(empleadoDTO.getTurno()); // se setean los datos ingreados en el empleadoDTO del requestbody
+        empleado.setTurnoActual(empleadoDTO.getTurno());
+        empleado.setUsuarioAdiciono(usuarioAdicino);// se setean los datos ingreados en el empleadoDTO del requestbody
         empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia())); // se forma la contraseña encriptada con el passwordEncoder
 
         empleadoRepository.save(empleado);// se utiliza el metodo save para guardae el objeto empleado
@@ -87,13 +95,13 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
         return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registrado con  éxito"));
     }
 
-    @GetMapping("/publico/roles/{dpi}")
-    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
-        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
-        if (empleado == null) {
-            return ResponseEntity.notFound().build();
-        }
-        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
-        return ResponseEntity.ok(roles);
-    }
+//    @GetMapping("/publico/roles/{dpi}")
+//    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
+//        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
+//        if (empleado == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
+//        return ResponseEntity.ok(roles);
+//    }
 }

@@ -89,10 +89,10 @@ public class SolLicenciasEmpleadoSvcImpl extends CommonSvcImpl<SolLicenciasEmple
 
                 email.sendHtmlEmail(licencia.getCorreo(), asuntoCorreoInactivar, contentInactivar);
 
-                repository.actualizarEstadoUsuario("Inactivo", licencia.getUsuario());
+                repository.actualizarEstadoUsuario("Inactivo", licencia.getUsuario(), usuarioAprobo);
             }
 
-            repository.actualizarEstadoLicencia(estadoSol, usuarioAprobo, idLicencia);
+            repository.actualizarEstadoLicencia(estadoSol, usuarioAprobo, idLicencia, usuarioAprobo);
         } catch (Exception e) {
             throw new UnsupportedOperationException(e);
         }

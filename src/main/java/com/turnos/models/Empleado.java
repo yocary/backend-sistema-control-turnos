@@ -53,6 +53,9 @@ public class Empleado {
     @Column(name = "turno_actual", nullable = false)
     private String turnoActual;
 
+    @Column(unique = true, nullable = false)
+    private String usuarioAdiciono;
+
     @ManyToMany(fetch = FetchType.EAGER) // tiene relacion 
     @JoinTable(
             name = "empleado_rol",
@@ -131,7 +134,13 @@ public class Empleado {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
-    
+
+    public String getUsuarioAdiciono() {
+        return usuarioAdiciono;
+    }
+
+    public void setUsuarioAdiciono(String usuarioAdiciono) {
+        this.usuarioAdiciono = usuarioAdiciono;
+    }
 
 }

@@ -40,6 +40,8 @@ public class SolCambioTurno {
 
     private String estado;
 
+    private String usuarioAdiciono;
+
     public Long getIdSolicitud() {
         return idSolicitud;
     }
@@ -110,6 +112,14 @@ public class SolCambioTurno {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getUsuarioAdiciono() {
+        return usuarioAdiciono;
+    }
+
+    public void setUsuarioAdiciono(String usuarioAdiciono) {
+        this.usuarioAdiciono = usuarioAdiciono;
     }
 
 }
