@@ -24,16 +24,13 @@ public class Application {
 
     @PostConstruct
     public void init() {
-        // Establecer la zona horaria por defecto
         TimeZone.setDefault(TimeZone.getTimeZone("America/Guatemala"));
         logger.info("La zona horaria por defecto se ha establecido a: America/Guatemala");
         imprimirHoraActual();
     }
 
     private void imprimirHoraActual() {
-        // Obtener la hora actual en la zona horaria de Guatemala
         long horaActual = System.currentTimeMillis();
-        // Imprimir la hora actual en la consola
         logger.info("La hora actual en Guatemala (en milisegundos) es: " + horaActual);
     }
 }
