@@ -43,7 +43,6 @@ public class AuthController {
 
         final String jwt = jwtUtil.generateTokenWithUserDetails(userDetails, empleado.getUsuario(), obtenerRoles(empleado), empleado.getCorreo());
 
-        // Incluye el DPI y los roles en la respuesta
         AuthResponse authResponse = new AuthResponse(jwt, empleado.getUsuario(), obtenerRoles(empleado));
 
         return ResponseEntity.ok(authResponse);

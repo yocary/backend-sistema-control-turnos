@@ -13,8 +13,6 @@ public class AuthRequest {
     private String username;
     private String password;
 
-    // Constructores, getters y setters
-
     public String getUsername() {
         return username;
     }

@@ -13,8 +13,6 @@ public class AuthResponse {
         this.roles = roles;
     }
 
-    // Getters y setters
-
     public String getJwt() {
         return jwt;
     }

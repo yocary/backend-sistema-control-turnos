@@ -30,29 +30,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/solCambioTurno")
 @RestController
 public class SolCambioTurnoController extends CommonController<SolCambioTurno, SolCambioTurnoSvc, SolCambioTurnoValidator> {
-    
+
     @Autowired
     private AuthUtil authUtil;
-    
+
     @PostMapping("/guardarSolCambioTurno")
-    public ResponseEntity<?> cambiarTurno(@RequestBody SolCambioTurno solicitud) {
-        
-        String usuarioAdicino = authUtil.getCurrentUsername();
+    public void cambiarTurno(@RequestBody SolCambioTurno solicitud) {
         try {
-            
+            String usuarioAdicino = authUtil.getCurrentUsername();
             solicitud.setUsuarioAdiciono(usuarioAdicino);
             service.save(solicitud);
-            return new ResponseEntity<>("Cambio de turno solicitado con éxito", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al solicitar el cambio de turno", HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
         }
     }
-    
+
     @GetMapping("/obtenerSolCambioTurno/{estado}")
     public List<obtenerSolCambioTurnoProjection> obtenerSolCambioTurno(@PathVariable String estado) {
         return service.obtenerSolCambioTurno(estado);
     }
-    
+
     @PostMapping("/actualizarEstadoTurno/{estadoSol}/{idSolicitud}")
     @ApiOperation("Actualizar estado turno")
     public void actualizarEstadoTurno(@PathVariable String estadoSol, @PathVariable Long idSolicitud) {

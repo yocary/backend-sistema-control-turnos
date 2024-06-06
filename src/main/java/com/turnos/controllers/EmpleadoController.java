@@ -95,13 +95,4 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
         return ResponseEntity.ok(Collections.singletonMap("message", "Empleado registrado con  éxito"));
     }
 
-//    @GetMapping("/publico/roles/{dpi}")
-//    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
-//        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
-//        if (empleado == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
-//        return ResponseEntity.ok(roles);
-//    }
 }

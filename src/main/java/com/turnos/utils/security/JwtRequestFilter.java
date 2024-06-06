@@ -56,7 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         try {
             return jwtUtil.extractUsername(jwt);
         } catch (ExpiredJwtException e) {
-            // Token expired, handle it here
+
             return null;
         }
     }
