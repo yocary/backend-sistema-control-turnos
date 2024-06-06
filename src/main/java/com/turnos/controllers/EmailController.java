@@ -21,7 +21,7 @@ public class EmailController {
     @GetMapping("/sendHtmlEmail")
     public String sendHtmlEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String htmlContent) {
         try {
-            emailService.sendHtmlEmail(to, subject, htmlContent);
+            emailService.sendHtmlEmail(to, subject, htmlContent);// 
             return "Correo enviado con éxito";
         } catch (MessagingException e) {
             return "Error al enviar el correo: " + e.getMessage();

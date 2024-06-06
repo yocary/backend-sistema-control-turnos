@@ -45,18 +45,14 @@ public class SolLicenciasEmpleadoSvcImpl extends CommonSvcImpl<SolLicenciasEmple
 
         obtenerLicenciaProjection licencia = repository.obtenerLicencia(idLicencia);
 
-        String usuarioAprobo = authUtil.getCurrentUsername();
-
-        System.out.println("CORREO::: " + licencia.getCorreo());
-        System.out.println("NOMBRE::: " + licencia.getNombre());
-        System.out.println("USUARIO::: " + licencia.getUsuario());
+        String usuarioAprobo = authUtil.getCurrentUsername();//el usuario que aprobo la solicitud que es el usuario que esta logueado en ese momento
 
         String estadoSolicitud = "";
         String estadoSolCorreo = "";
         String admin = "";
 
         try {
-            if ("AAA".equals(estadoSol)) {
+            if ("AAA".equals(estadoSol)) {//aprobación por el admin
                 estadoSolicitud = "Aprobada";
                 estadoSolCorreo = "aprobado";
                 admin = "administrador del área";
@@ -80,7 +76,7 @@ public class SolLicenciasEmpleadoSvcImpl extends CommonSvcImpl<SolLicenciasEmple
 
             email.sendHtmlEmail(licencia.getCorreo(), asuntoCorreo, content);
 
-            if ("AAR".equals(estadoSol)) {
+            if ("AAR".equals(estadoSol)) { // inactivar el usuario cuando se aprueba la licencia 
 
                 String asuntoCorreoInactivar = "Solicitud de Licencia " + estadoSolicitud;
                 String contentInactivar = "Estimado(a) " + licencia.getNombre() + " <br> \n"

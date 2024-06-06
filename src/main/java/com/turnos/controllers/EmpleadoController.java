@@ -59,7 +59,7 @@ public class EmpleadoController extends CommonController<Empleado, EmpleadoSvc, 
         empleado.setEstado(empleadoDTO.getEstado());
         empleado.setUsuario(empleadoDTO.getUsuario());
         empleado.setCorreo(empleadoDTO.getCorreo());
-        empleado.setTurnoActual(empleadoDTO.getTurno()); // se setean los datos ingreados en el empleadoDTO del requestbody
+        empleado.setTurnoActual(empleadoDTO.getTurno()); // se setean los datos ingreados en el empleadoDTO 
         empleado.setContrasenia(passwordEncoder.encode(empleadoDTO.getContrasenia())); // se forma la contraseña encriptada con el passwordEncoder
 
         empleadoRepository.save(empleado);// se utiliza el metodo save para guardae el objeto empleado

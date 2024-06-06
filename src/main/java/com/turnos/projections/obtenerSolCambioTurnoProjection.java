@@ -11,7 +11,7 @@ package com.turnos.projections;
  */
 public interface obtenerSolCambioTurnoProjection {
     
-    String getIdSolicitud();
+    String getIdSolicitud();// estas son las variables que se obtendran en el select de cambio de turno
     String getTurnoActual();
     String getTurnoNuevo();
     String getUsuario();

@@ -37,10 +37,6 @@ public class SolCambioTurnoSvcImpl extends CommonSvcImpl<SolCambioTurno, SolCamb
 
         obtenerInfoSolTurnoProjection turno = repository.obtenerInfoSolTurno(idSolicitud);
 
-        System.out.println("CORREO::: " + turno.getCorreo());
-        System.out.println("NOMBRE::: " + turno.getNombre());
-        System.out.println("USUARIO::: " + turno.getUsuario());
-
         String estadoSolicitud = "";
         String estadoSolCorreo = "";
         String admin = "";
@@ -66,7 +62,7 @@ public class SolCambioTurnoSvcImpl extends CommonSvcImpl<SolCambioTurno, SolCamb
 
                 repository.actualizarTurnoEmpleado(turno.getTurnoNuevo(), turno.getUsuario());
             }
-            
+
             repository.actualizarEstadoTurno(estadoSol, idSolicitud);
 
         } catch (Exception e) {

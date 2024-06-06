@@ -21,7 +21,7 @@ public class AuthUtil {
 
     private static final Logger logger = Logger.getLogger(AuthUtil.class.getName());
 
-    public Empleado getCurrentEmpleado() {
+    public Empleado getCurrentEmpleado() { // se obtiene la info del usuario logueado
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -33,22 +33,22 @@ public class AuthUtil {
         return null;
     }
 
-    public String getCurrentUsername() {
+    public String getCurrentUsername() { //se obtiene el usuario
         Empleado empleado = getCurrentEmpleado();
         return (empleado != null) ? empleado.getUsuario() : null;
     }
 
-    public String getCurrentUserEmail() {
+    public String getCurrentUserEmail() { // se obtiene el correo del usuario logueado
         Empleado empleado = getCurrentEmpleado();
         return (empleado != null) ? empleado.getCorreo() : null;
     }
 
-    public String getCurrentUserNombre() {
+    public String getCurrentUserNombre() { // nombre del usuario logueado
         Empleado empleado = getCurrentEmpleado();
         return (empleado != null) ? empleado.getNombre(): null;
     }
 
-    public Set<String> getCurrentUserRoles() {
+    public Set<String> getCurrentUserRoles() { //se obtiene el rol de usuario logueado
         Empleado empleado = getCurrentEmpleado();
         return (empleado != null) ? empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet()) : null;
     }
