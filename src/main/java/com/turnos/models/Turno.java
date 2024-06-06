@@ -22,8 +22,11 @@ public class Turno {
     @Column(name = "id_turno")
     private Integer idTurno;
 
-    @Column(name = "dpi")
-    private String dpi;
+    @Column(name = "usuario")
+    private String usuario;
+
+    @Column(name = "usuario_adiciono")
+    private String usuariAdiciono;
 
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
@@ -35,7 +38,6 @@ public class Turno {
     private String hora;
 
     // Getters and Setters
-
     public Integer getIdTurno() {
         return idTurno;
     }
@@ -44,12 +46,12 @@ public class Turno {
         this.idTurno = idTurno;
     }
 
-    public String getDpi() {
-        return dpi;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setDpi(String dpi) {
-        this.dpi = dpi;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public LocalDate getFechaInicio() {
@@ -75,5 +77,13 @@ public class Turno {
     public void setHora(String hora) {
         this.hora = hora;
     }
-}
 
+    public String getUsuariAdiciono() {
+        return usuariAdiciono;
+    }
+
+    public void setUsuariAdiciono(String usuariAdiciono) {
+        this.usuariAdiciono = usuariAdiciono;
+    }
+
+}

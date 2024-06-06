@@ -20,10 +20,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
-
-    public Empleado getEmpleadoByDpi(String dpi) {
-        return empleadoRepository.findByDpi(dpi);
-    }
+//
+//    public Empleado getEmpleadoByDpi(String dpi) {
+//        return empleadoRepository.findByDpi(dpi);
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

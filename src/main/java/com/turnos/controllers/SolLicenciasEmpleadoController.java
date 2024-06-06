@@ -4,11 +4,13 @@ import com.turnos.commons.CommonController;
 import com.turnos.models.SolLicenciasEmpleado;
 import com.turnos.projections.obtenerSolLicenciasProjection;
 import com.turnos.services.SolLicenciasEmpleadoSvc;
+import com.turnos.utils.security.AuthUtil;
 import com.turnos.validator.SolLicenciasEmpleadoValidator;
 import io.swagger.annotations.ApiOperation;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/solLicenciasEmpleado")
 @RestController
 public class SolLicenciasEmpleadoController extends CommonController<SolLicenciasEmpleado, SolLicenciasEmpleadoSvc, SolLicenciasEmpleadoValidator> {
+
+    @Autowired
+    private AuthUtil authUtil;
 
     @GetMapping("/obtenerSolLicencias/{estado}")
     public List<obtenerSolLicenciasProjection> obtenerSolLicenciasPA(@PathVariable String estado) {
@@ -35,6 +40,9 @@ public class SolLicenciasEmpleadoController extends CommonController<SolLicencia
     @PostMapping("/guardar")
     public SolLicenciasEmpleado solicitarLicencia(@RequestBody SolLicenciasEmpleado solicitud) {//esto es un json que lleva los datos de la tabla en la que se van a insertar datos 
         Date date = new Date();
+        
+        String usuarioAdicino = authUtil.getCurrentUsername();
+        
         SolLicenciasEmpleado nuevaSolicitud = new SolLicenciasEmpleado();
         nuevaSolicitud.setUsuario(solicitud.getUsuario());
         nuevaSolicitud.setCodLicencia(solicitud.getCodLicencia());
@@ -42,6 +50,7 @@ public class SolLicenciasEmpleadoController extends CommonController<SolLicencia
         nuevaSolicitud.setFechaInicio(solicitud.getFechaInicio());
         nuevaSolicitud.setFechaFin(solicitud.getFechaFin());
         nuevaSolicitud.setMotivoSolicitud(solicitud.getMotivoSolicitud());
+        nuevaSolicitud.setUsuarioAdiciono(usuarioAdicino);
         nuevaSolicitud.setFechaCreacion(date);
 
         service.save(nuevaSolicitud);// se envian los datos de modelo para ser guardados en BD

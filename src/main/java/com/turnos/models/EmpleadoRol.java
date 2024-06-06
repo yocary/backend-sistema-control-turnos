@@ -36,6 +36,9 @@ public class EmpleadoRol implements Serializable {
     @JoinColumn(name = "rol_id", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "fk_rol"))
     private Rol rol;
 
+    @Column(name = "usuario_adiciono", unique = true, nullable = false)
+    private String usuarioAdiciono;
+    
     public EmpleadoRol() {
     }
 
@@ -66,6 +69,16 @@ public class EmpleadoRol implements Serializable {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public String getUsuarioAdiciono() {
+        return usuarioAdiciono;
+    }
+
+    public void setUsuarioAdiciono(String usuarioAdiciono) {
+        this.usuarioAdiciono = usuarioAdiciono;
+    }
+    
+    
 
     @Override
     public boolean equals(Object o) {

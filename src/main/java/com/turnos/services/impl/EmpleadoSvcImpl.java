@@ -29,13 +29,13 @@ public class EmpleadoSvcImpl extends CommonSvcImpl<Empleado, EmpleadoRepository>
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @GetMapping("/roles/{dpi}")
-    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
-        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
-        if (empleado == null) {
-            return ResponseEntity.notFound().build();
-        }
-        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
-        return ResponseEntity.ok(roles);
-    }
+//    @GetMapping("/roles/{dpi}")
+//    public ResponseEntity<?> getRolesByDpi(@PathVariable String dpi) {
+//        Empleado empleado = userDetailsService.getEmpleadoByDpi(dpi);
+//        if (empleado == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        Set<String> roles = empleado.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet());
+//        return ResponseEntity.ok(roles);
+//    }
 }

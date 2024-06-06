@@ -46,18 +46,18 @@ public interface SolLicenciasEmpleadoRepository extends CrudRepository<SolLicenc
     @Modifying
     @Transactional
     @Query(value = "UPDATE sol_licencias_empleado\n"
-            + "SET estado_solicitud = :estadoSol, admin_aprobo = :adminAprobo\n"
+            + "SET estado_solicitud = :estadoSol, admin_aprobo = :adminAprobo, usuario_adiciono = :usuarioAdiciono \n"
             + "WHERE id_licencia = :idLicencia",
             nativeQuery = true)
     void actualizarEstadoLicencia(@Param("estadoSol") String estadoSol, @Param("adminAprobo") String adminAprobo,
-            @Param("idLicencia") Long idLicencia);
+            @Param("idLicencia") Long idLicencia, @Param("usuarioAdiciono") String usuarioAdiciono);
 
     @Modifying
     @Query(value = "UPDATE control_turnos.empleado \n"
-            + "SET estado = :estado \n"
+            + "SET estado = :estado, usuario_adiciono = :usuarioAdiciono \n"
             + "WHERE usuario = :usuario",
             nativeQuery = true)
-    public void actualizarEstadoUsuario(@Param("estado") String estado, @Param("usuario") String usuario);
+    public void actualizarEstadoUsuario(@Param("estado") String estado, @Param("usuario") String usuario, @Param("usuarioAdiciono") String usuarioAdiciono);
 
     @Query(value = "select\n"
             + "	cl.nombre_estado as licencia,\n"

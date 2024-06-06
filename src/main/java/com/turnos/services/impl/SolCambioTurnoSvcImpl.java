@@ -11,6 +11,7 @@ import com.turnos.projections.obtenerInfoSolTurnoProjection;
 import com.turnos.projections.obtenerSolCambioTurnoProjection;
 import com.turnos.repositories.SolCambioTurnoRepository;
 import com.turnos.services.SolCambioTurnoSvc;
+import com.turnos.utils.security.AuthUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class SolCambioTurnoSvcImpl extends CommonSvcImpl<SolCambioTurno, SolCamb
     @Autowired
     private EmailServiceImpl email;
 
+    @Autowired
+    private AuthUtil authUtil;
+
     @Override
     public List<obtenerSolCambioTurnoProjection> obtenerSolCambioTurno(String estado) {
         return repository.obtenerSolCambioTurno(estado);
@@ -36,6 +40,12 @@ public class SolCambioTurnoSvcImpl extends CommonSvcImpl<SolCambioTurno, SolCamb
     public void actualizarEstadoTurno(String estadoSol, Long idSolicitud) {
 
         obtenerInfoSolTurnoProjection turno = repository.obtenerInfoSolTurno(idSolicitud);
+
+        String usuarioAdicino = authUtil.getCurrentUsername();
+
+        System.out.println("CORREO::: " + turno.getCorreo());
+        System.out.println("NOMBRE::: " + turno.getNombre());
+        System.out.println("USUARIO::: " + turno.getUsuario());
 
         String estadoSolicitud = "";
         String estadoSolCorreo = "";
@@ -60,10 +70,10 @@ public class SolCambioTurnoSvcImpl extends CommonSvcImpl<SolCambioTurno, SolCamb
 
             if ("TA".equals(estadoSol)) {
 
-                repository.actualizarTurnoEmpleado(turno.getTurnoNuevo(), turno.getUsuario());
+                repository.actualizarTurnoEmpleado(turno.getTurnoNuevo(), turno.getUsuario(), usuarioAdicino);
             }
 
-            repository.actualizarEstadoTurno(estadoSol, idSolicitud);
+            repository.actualizarEstadoTurno(estadoSol, idSolicitud, usuarioAdicino);
 
         } catch (Exception e) {
             throw new UnsupportedOperationException(e);

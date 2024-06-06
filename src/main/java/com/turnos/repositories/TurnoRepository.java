@@ -23,12 +23,13 @@ public interface TurnoRepository extends CrudRepository<Turno, Object> {
 
     @Modifying
     @Query(value = "INSERT INTO control_turnos.turno " //se insertan los campos en la tabla turno
-            + "(dpi, fecha_inicio, fecha_fin, hora) "
-            + "VALUES (:dpi, :fechaInicio, :fechaFin, :hora)",
+            + "(usuario, fecha_inicio, fecha_fin, hora, usuario_adiciono) "
+            + "VALUES (:usuario, :fechaInicio, :fechaFin, :hora, :usuarioAdiciono)",
             nativeQuery = true)
     void insertTurno(
-            @Param("dpi") String dpi,
+            @Param("usuario") String usuario,
             @Param("fechaInicio") LocalDate fechaInicio,
             @Param("fechaFin") LocalDate fechaFin,
-            @Param("hora") Timestamp hora);
+            @Param("hora") Timestamp hora,
+            @Param("usuarioAdiciono") String usuarioAdiciono);
 }
