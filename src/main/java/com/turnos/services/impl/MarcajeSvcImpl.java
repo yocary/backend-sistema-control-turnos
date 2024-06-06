@@ -30,7 +30,7 @@ public class MarcajeSvcImpl extends CommonSvcImpl<Marcaje, MarcajeRepository> im
     @Override
     public Marcaje saveMarcaje(Marcaje marcaje) {
 
-        marcaje.setUsuario(authUtil.getCurrentUsername());
+        marcaje.setUsuarioAdiciono(authUtil.getCurrentUsername());
         return repository.save(marcaje);
     }
 
@@ -67,11 +67,10 @@ public class MarcajeSvcImpl extends CommonSvcImpl<Marcaje, MarcajeRepository> im
 
         LocalDate fechaActual = LocalDate.now(zonaHorariaCliente);
 
-        Marcaje marcajeExistente = repository.findByUsuarioAndFecha(usuario, fechaActual);
+        Marcaje marcajeExistente = repository.findByUsuarioAdicionoAndFecha(usuario, fechaActual);
 
         if (marcajeExistente == null) {
             marcajeExistente = new Marcaje();
-            marcajeExistente.setUsuario(usuario);
             marcajeExistente.setFecha(fechaActual);
         }
 
@@ -109,7 +108,7 @@ public class MarcajeSvcImpl extends CommonSvcImpl<Marcaje, MarcajeRepository> im
 
         LocalDate fechaActual = LocalDate.now(zonaHorariaCliente);
 
-        return repository.findByUsuarioAndFecha(usuario, fechaActual);
+        return repository.findByUsuarioAdicionoAndFecha(usuario, fechaActual);
     }
 
 }

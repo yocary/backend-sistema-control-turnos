@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MarcajeRepository extends CrudRepository<Marcaje, Object> {
 
-    Marcaje findByUsuarioAndFecha(String usuario, LocalDate fecha);
+    Marcaje findByUsuarioAdicionoAndFecha(String usuario, LocalDate fecha);
 
     List<Marcaje> findByFecha(LocalDate fecha);
 }

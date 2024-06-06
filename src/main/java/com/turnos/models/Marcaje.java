@@ -33,7 +33,6 @@ public class Marcaje {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String usuario;
     private LocalDate fecha;
     private LocalTime horaEntrada;
     private LocalTime horaDescanso1;
