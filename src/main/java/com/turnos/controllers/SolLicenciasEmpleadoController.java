@@ -38,13 +38,13 @@ public class SolLicenciasEmpleadoController extends CommonController<SolLicencia
     }
 
     @PostMapping("/guardar")
-    public SolLicenciasEmpleado solicitarLicencia(@RequestBody SolLicenciasEmpleado solicitud) {//esto es un json que lleva los datos de la tabla en la que se van a insertar datos 
+    public SolLicenciasEmpleado solicitarLicencia(@RequestBody SolLicenciasEmpleado solicitud) { //esto es un json que lleva los datos de la tabla en la que se van a insertar datos 
         Date date = new Date();
         
         String usuarioAdicino = authUtil.getCurrentUsername();
         
         SolLicenciasEmpleado nuevaSolicitud = new SolLicenciasEmpleado();
-        nuevaSolicitud.setUsuario(solicitud.getUsuario());
+        nuevaSolicitud.setUsuario(usuarioAdicino);
         nuevaSolicitud.setCodLicencia(solicitud.getCodLicencia());
         nuevaSolicitud.setEstadoSolicitud(solicitud.getEstadoSolicitud());
         nuevaSolicitud.setFechaInicio(solicitud.getFechaInicio());
@@ -53,9 +53,9 @@ public class SolLicenciasEmpleadoController extends CommonController<SolLicencia
         nuevaSolicitud.setUsuarioAdiciono(usuarioAdicino);
         nuevaSolicitud.setFechaCreacion(date);
 
-        service.save(nuevaSolicitud);// se envian los datos de modelo para ser guardados en BD
+        service.save(nuevaSolicitud); //esto es un json que lleva los datos de la tabla en la que se van a insertar datos 
 
-        return nuevaSolicitud;// retornan como tal el modelo con los datos que ingresamos 
+        return nuevaSolicitud; // retornan como tal el modelo con los datos que ingresamos 
     }
 
 }

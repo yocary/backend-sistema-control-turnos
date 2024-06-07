@@ -38,6 +38,7 @@ public class SolCambioTurnoController extends CommonController<SolCambioTurno, S
     public void cambiarTurno(@RequestBody SolCambioTurno solicitud) {
         try {
             String usuarioAdicino = authUtil.getCurrentUsername();
+            solicitud.setUsuario(usuarioAdicino);
             solicitud.setUsuarioAdiciono(usuarioAdicino);
             service.save(solicitud);
         } catch (Exception e) {
